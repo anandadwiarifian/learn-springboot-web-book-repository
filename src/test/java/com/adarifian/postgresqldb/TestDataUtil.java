@@ -9,73 +9,67 @@ public class TestDataUtil {
 
     public static Author createTestAuthorA() {
         return Author.builder()
-                .id(1L)
                 .name("James")
-                .age(75)
+                .age(50)
                 .build();
     }
 
     public static Author createTestAuthorB() {
         return Author.builder()
-                .id(2L)
                 .name("Tolkien")
-                .age(30)
+                .age(80)
                 .build();
     }
 
     public static Author createTestAuthorC() {
         return Author.builder()
-                .id(3L)
                 .name("Richard")
-                .age(30)
+                .age(40)
                 .build();
     }
 
     public static Author createTestAuthorD() {
         return Author.builder()
-                .id(4L)
                 .name("Jeremy")
-                .age(30)
+                .age(50)
                 .build();
     }
 
     public static Author createTestAuthorE() {
         return Author.builder()
-                .id(5L)
                 .name("GoT Writer")
-                .age(30)
+                .age(70)
                 .build();
     }
 
     public static Author createTestAuthorF() {
         return Author.builder()
-                .id(6L)
                 .name("Sun Tzu")
                 .age(30)
                 .build();
     }
 
-    public static Book createTestBookA() {
+    public static Book createTestBookA(Author author) {
         return Book.builder()
                 .isbn("123")
                 .title("LOTR")
-                .authorId(2L)
+                .author(author)
                 .build();
     }
 
-    public static Book createTestBookB() {
+    public static Book createTestBookB(Author author) {
         return Book.builder()
                 .isbn("1234")
                 .title("Game of Thrones")
-                .authorId(5L)
+                .author(author)
                 .build();
     }
 
-    public static Book createTestBookC() {
+    public static Book createTestBookC(Author author) {
         return Book.builder()
                 .isbn("12345")
                 .title("Art of War")
-                .authorId(6L)
+                .author(author)
                 .build();
     }
 
