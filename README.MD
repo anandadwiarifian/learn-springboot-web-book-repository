@@ -24,3 +24,20 @@ Learning project for Spring Boot Web.
 - **Entities** - Database models
 - **DTOs** - Data transfer objects for API requests/responses
 - **Exception Handling** - Global exception handler
+
+## API Endpoints
+
+### Authors
+- `POST /authors` - Create author
+- `GET /authors` - List authors (paginated)
+- `GET /authors/{id}` - Get author by ID
+- `PUT /authors/{id}` - Full update author
+- `PATCH /authors/{id}` - Partial update author
+- `DELETE /authors/{id}` - Delete author
+
+### Books
+- `PUT /books/{isbn}` - Create/update book (idempotent)
+- `GET /books` - List books (paginated)
+- `GET /books/{isbn}` - Get book by ISBN
+- `PATCH /books/{isbn}` - Partial update book
+- `DELETE /books/{isbn}` - Delete book
