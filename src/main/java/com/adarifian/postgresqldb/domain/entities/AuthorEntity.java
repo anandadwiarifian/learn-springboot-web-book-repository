@@ -1,4 +1,6 @@
-package com.adarifian.postgresqldb.domain;
+package com.adarifian.postgresqldb.domain.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +18,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "authors")
-public class Author {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class AuthorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_id_seq")

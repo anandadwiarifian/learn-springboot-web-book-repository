@@ -1,4 +1,7 @@
-package com.adarifian.postgresqldb.domain;
+package com.adarifian.postgresqldb.domain.entities;
+
+import org.hibernate.annotations.Cascade;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -16,14 +19,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "books")
-public class Book {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class BookEntity {
 
     @Id
     private String isbn;
 
     private String title;
 
-    @ManyToOne() // I don't really like cascade so I don't use it
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "author_id")
-    private Author author;
+    private AuthorEntity author;
 }

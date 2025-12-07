@@ -13,8 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
 import com.adarifian.postgresqldb.TestDataUtil;
-import com.adarifian.postgresqldb.domain.Author;
-import com.adarifian.postgresqldb.domain.Book;
+import com.adarifian.postgresqldb.domain.entities.AuthorEntity;
+import com.adarifian.postgresqldb.domain.entities.BookEntity;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -24,17 +24,18 @@ public class BookRepositoryIntegrationTests {
     private AuthorRepository authorRepository;
 
     @Autowired
-    public BookRepositoryIntegrationTests(BookRepository underTest, AuthorRepository authorRepository) {
+    public BookRepositoryIntegrationTests(BookRepository underTest,
+            AuthorRepository authorRepository) {
         this.underTest = underTest;
         this.authorRepository = authorRepository;
     }
 
     @Test
     public void testBookCanBeCreatedAndFound() {
-        Author author = TestDataUtil.createTestAuthorB();
+        AuthorEntity author = TestDataUtil.createTestAuthorB();
         authorRepository.save(author);
 
-        Book book = TestDataUtil.createTestBookA(author);
+        BookEntity book = TestDataUtil.createTestBookA(author);
         underTest.save(book);
 
         var result = underTest.findById(book.getIsbn());
@@ -44,15 +45,15 @@ public class BookRepositoryIntegrationTests {
 
     @Test
     public void testMultipleBooksCanBeCreatedAndFound() {
-        Author authorE = TestDataUtil.createTestAuthorE();
-        Author authorF = TestDataUtil.createTestAuthorF();
+        AuthorEntity authorE = TestDataUtil.createTestAuthorE();
+        AuthorEntity authorF = TestDataUtil.createTestAuthorF();
         authorRepository.saveAll(List.of(authorE, authorF));
 
-        Book bookB = TestDataUtil.createTestBookB(authorE);
-        Book bookC = TestDataUtil.createTestBookC(authorF);
+        BookEntity bookB = TestDataUtil.createTestBookB(authorE);
+        BookEntity bookC = TestDataUtil.createTestBookC(authorF);
         underTest.saveAll(List.of(bookB, bookC));
 
-        Collection<Book> results = IterableUtil.toCollection(underTest.findAll());
+        Collection<BookEntity> results = IterableUtil.toCollection(underTest.findAll());
 
         assertEquals(results.size(), 2);
         assertEquals(results.contains(bookB), true);
@@ -61,28 +62,28 @@ public class BookRepositoryIntegrationTests {
 
     @Test
     public void testUpdateBook() {
-        Author author = TestDataUtil.createTestAuthorB();
+        AuthorEntity author = TestDataUtil.createTestAuthorB();
         authorRepository.save(author);
-        Book book = TestDataUtil.createTestBookA(author);
+        BookEntity book = TestDataUtil.createTestBookA(author);
         underTest.save(book);
 
         book.setTitle("The Hobbit");
         underTest.save(book);
 
-        Optional<Book> result = underTest.findById(book.getIsbn());
+        Optional<BookEntity> result = underTest.findById(book.getIsbn());
         assertEquals(result.get(), book);
     }
 
     @Test
     public void testDeleteBook() {
-        Author authorB = TestDataUtil.createTestAuthorB();
+        AuthorEntity authorB = TestDataUtil.createTestAuthorB();
         authorRepository.save(authorB);
-        Book book = TestDataUtil.createTestBookA(authorB);
+        BookEntity book = TestDataUtil.createTestBookA(authorB);
         underTest.save(book);
 
         underTest.deleteById(book.getIsbn());
 
-        Optional<Book> result = underTest.findById(book.getIsbn());
+        Optional<BookEntity> result = underTest.findById(book.getIsbn());
         assertEquals(result.isEmpty(), true);
     }
 }

@@ -1,18 +1,14 @@
 package com.adarifian.postgresqldb.repositories;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import com.adarifian.postgresqldb.domain.Author;
+import com.adarifian.postgresqldb.domain.entities.AuthorEntity;
 
 @Repository
-public interface AuthorRepository extends CrudRepository<Author, Long> {
+public interface AuthorRepository
+        extends CrudRepository<AuthorEntity, Long>, PagingAndSortingRepository<AuthorEntity, Long> {
 
-    public Iterable<Author> findByAgeLessThan(int age);
-
-    // for learning purposes. JPA can create the query for you based on
-    // the "LessThanEqual" keyword
-    @Query("SELECT a FROM Author a WHERE a.age <= ?1")
-    public Iterable<Author> findAgeLessThanEqual(int age);
+    public Iterable<AuthorEntity> findByAgeLessThan(int age);
 }
