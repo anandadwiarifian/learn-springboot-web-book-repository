@@ -6,11 +6,13 @@ Learning project for Spring Boot Web.
 - REST API for managing books and authors
 - CRUD operations for both entities
 - One-to-many relationship (Author → Books)
+- Basic Authentication with role-based access control
 
 ## Tech Stack
 - Java 17
 - Spring Boot 3.5.7
 - Spring Data JPA
+- Spring Security (Basic Auth)
 - PostgreSQL
 - H2 (testing)
 - Lombok
@@ -24,20 +26,105 @@ Learning project for Spring Boot Web.
 - **Entities** - Database models
 - **DTOs** - Data transfer objects for API requests/responses
 - **Exception Handling** - Global exception handler
+- **Security** - Basic authentication configuration
+
+## Configuration
+
+### Environment Variables
+
+The application can be configured using environment variables (recommended for production) or `application.properties` (for development).
+
+| Environment Variable | Property Name | Description | Default |
+|---------------------|---------------|-------------|---------|
+| `SPRING_DATASOURCE_URL` | `spring.datasource.url` | PostgreSQL JDBC URL | `jdbc:postgresql://localhost:5432/postgres` |
+| `SPRING_DATASOURCE_USERNAME` | `spring.datasource.username` | Database username | `postgres` |
+| `SPRING_DATASOURCE_PASSWORD` | `spring.datasource.password` | Database password | `yourpassword` |
+| `SECURITY_USER_PASSWORD` | `security.user.password` | Password for user role | `user-password` |
+| `SECURITY_ADMIN_PASSWORD` | `security.admin.password` | Password for admin role | `admin-password` |
+
+**Note:** Environment variables automatically override properties defined in `application.properties`.
+
+### Example: Setting Environment Variables
+
+```bash
+# Database configuration
+export SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/mydb
+export SPRING_DATASOURCE_USERNAME=dbuser
+export SPRING_DATASOURCE_PASSWORD=dbpass
+
+# Security credentials
+export SECURITY_USER_PASSWORD=secure-user-pass
+export SECURITY_ADMIN_PASSWORD=secure-admin-pass
+```
+
+## Security
+
+### Authentication
+This API uses HTTP Basic Authentication. Include credentials in the `Authorization` header:
+
+```
+Authorization: Basic base64(username:password)
+```
+
+### Users and Roles
+- **User** (username: `user`) - Can view and modify books and authors
+- **Admin** (username: `admin`) - Full access including DELETE operations
+
+### Access Control
+- **Public** - `/healthcheck` (no authentication required)
+- **USER or ADMIN** - All GET, POST, PUT, PATCH operations on `/authors/**` and `/books/**`
+- **ADMIN only** - All DELETE operations
 
 ## API Endpoints
 
+### Health
+- `GET /healthcheck` - Health check endpoint (public, no auth required)
+
 ### Authors
-- `POST /authors` - Create author
-- `GET /authors` - List authors (paginated)
-- `GET /authors/{id}` - Get author by ID
-- `PUT /authors/{id}` - Full update author
-- `PATCH /authors/{id}` - Partial update author
-- `DELETE /authors/{id}` - Delete author
+- `POST /authors` - Create author (requires: USER or ADMIN)
+- `GET /authors` - List authors (paginated) (requires: USER or ADMIN)
+- `GET /authors/{id}` - Get author by ID (requires: USER or ADMIN)
+- `PUT /authors/{id}` - Full update author (requires: USER or ADMIN)
+- `PATCH /authors/{id}` - Partial update author (requires: USER or ADMIN)
+- `DELETE /authors/{id}` - Delete author (requires: ADMIN)
 
 ### Books
-- `PUT /books/{isbn}` - Create/update book (idempotent)
-- `GET /books` - List books (paginated)
-- `GET /books/{isbn}` - Get book by ISBN
-- `PATCH /books/{isbn}` - Partial update book
-- `DELETE /books/{isbn}` - Delete book
+- `PUT /books/{isbn}` - Create/update book (idempotent) (requires: USER or ADMIN)
+- `GET /books` - List books (paginated) (requires: USER or ADMIN)
+- `GET /books/{isbn}` - Get book by ISBN (requires: USER or ADMIN)
+- `PATCH /books/{isbn}` - Partial update book (requires: USER or ADMIN)
+- `DELETE /books/{isbn}` - Delete book (requires: ADMIN)
+
+## Running the Application
+
+### Development (using defaults from application.properties)
+```bash
+./mvnw spring-boot:run
+```
+
+### Production (using environment variables)
+```bash
+# Set environment variables
+export SPRING_DATASOURCE_URL=jdbc:postgresql://prod-db:5432/bookdb
+export SPRING_DATASOURCE_USERNAME=prod_user
+export SPRING_DATASOURCE_PASSWORD=prod_secret
+export SECURITY_USER_PASSWORD=strong-user-password
+export SECURITY_ADMIN_PASSWORD=strong-admin-password
+
+# Run the application
+./mvnw spring-boot:run
+```
+
+### Making Authenticated Requests
+
+Using curl:
+```bash
+# Public endpoint (no auth)
+curl http://localhost:8080/healthcheck
+
+# With user credentials
+curl -u user:user-password http://localhost:8080/authors
+
+# With admin credentials
+curl -u admin:admin-password -X DELETE http://localhost:8080/authors/1
+```
