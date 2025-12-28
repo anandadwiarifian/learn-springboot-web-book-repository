@@ -19,6 +19,44 @@ Learning project for Spring Boot Web.
 - Maven
 - SpringDoc OpenAPI (Swagger)
 
+## Prerequisites
+
+### Java 17
+This project requires Java 17 or higher.
+
+**Install using SDKMAN (recommended):**
+```bash
+# Install SDKMAN
+curl -s "https://get.sdkman.io" | bash
+
+# Install Java 17
+sdk install java 17.0.17
+
+# Verify installation
+java -version
+```
+
+**Or download directly from:**
+- [Oracle JDK](https://www.oracle.com/java/technologies/downloads/#java17)
+- [OpenJDK](https://openjdk.org/projects/jdk/17/)
+
+### Docker & PostgreSQL
+This project uses PostgreSQL as the database. Run it using Docker:
+- To run PostgreSQL container: 
+```bash
+docker run -d \
+  --name postgres-dev \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=yourpassword \
+  -p 5432:5432 \
+  postgres:16-alpine
+```
+
+- To start the container (if already created):
+```bash
+docker start postgres-dev
+```
+
 ## Project Structure
 - **Controllers** - REST endpoints for Books and Authors
 - **Services** - Business logic layer
