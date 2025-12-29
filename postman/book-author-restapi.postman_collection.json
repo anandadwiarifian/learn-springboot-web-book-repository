@@ -1,0 +1,492 @@
+{
+  "info": {
+    "name": "Yaak",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "book-repository-api",
+      "item": [
+        {
+          "name": "Books",
+          "item": [
+            {
+              "name": "Delete book",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "${[ BASE_URL ]}/books/:isbn",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "${[ BASE_URL ]}",
+                    "books",
+                    ":isbn"
+                  ],
+                  "variable": [
+                    {
+                      "id": "isbn",
+                      "key": "isbn",
+                      "value": "",
+                      "type": "string",
+                      "description": ""
+                    }
+                  ],
+                  "query": []
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "name": "Partial Update book",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "enabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "${[ BASE_URL ]}/books/:isbn",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "${[ BASE_URL ]}",
+                    "books",
+                    ":isbn"
+                  ],
+                  "variable": [
+                    {
+                      "id": "isbn",
+                      "key": "isbn",
+                      "value": "",
+                      "type": "string",
+                      "description": ""
+                    }
+                  ],
+                  "query": []
+                },
+                "description": "",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Breaking Bad Novel\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Full Update book",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "enabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "${[ BASE_URL ]}/books/:isbn",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "${[ BASE_URL ]}",
+                    "books",
+                    ":isbn"
+                  ],
+                  "variable": [
+                    {
+                      "id": "isbn",
+                      "key": "isbn",
+                      "value": "",
+                      "type": "string",
+                      "description": ""
+                    }
+                  ],
+                  "query": []
+                },
+                "description": "",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Tom Bombadil 3\",\n  \"author\": {\n    \"id\": 52,\n    \"name\": \"Tolkien\",\n    \"age\": 75\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get book",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "${[ BASE_URL ]}/books/:isbn",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "${[ BASE_URL ]}",
+                    "books",
+                    ":isbn"
+                  ],
+                  "variable": [
+                    {
+                      "id": "isbn",
+                      "key": "isbn",
+                      "value": "",
+                      "type": "string",
+                      "description": ""
+                    }
+                  ],
+                  "query": []
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "name": "Get books",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "${[ BASE_URL ]}/books",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "${[ BASE_URL ]}",
+                    "books"
+                  ],
+                  "variable": [],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "2",
+                      "disabled": false
+                    },
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "disabled": false
+                    }
+                  ]
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "name": "Create book",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "enabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "${[ BASE_URL ]}/books/:isbn",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "${[ BASE_URL ]}",
+                    "books",
+                    ":isbn"
+                  ],
+                  "variable": [
+                    {
+                      "id": "isbn",
+                      "key": "isbn",
+                      "value": "",
+                      "type": "string",
+                      "description": ""
+                    }
+                  ],
+                  "query": []
+                },
+                "description": "",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Golang Tutorial\",\n  \"author\": {\n    \"name\": \"Rob Pike\",\n    \"age\": 40\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            }
+          ],
+          "folderId": "fl_NgMnTrXTRg",
+          "id": "fl_GYEmguVN4g"
+        },
+        {
+          "name": "Authors",
+          "item": [
+            {
+              "name": "Delete Author",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "${[ BASE_URL ]}/authors/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "${[ BASE_URL ]}",
+                    "authors",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "id",
+                      "key": "id",
+                      "value": "",
+                      "type": "string",
+                      "description": ""
+                    }
+                  ],
+                  "query": []
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "name": "Partial Update author",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "enabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "${[ BASE_URL ]}/authors/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "${[ BASE_URL ]}",
+                    "authors",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "id",
+                      "key": "id",
+                      "value": "",
+                      "type": "string",
+                      "description": ""
+                    }
+                  ],
+                  "query": []
+                },
+                "description": "",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"age\": 55\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Full Update author",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "enabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "${[ BASE_URL ]}/authors/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "${[ BASE_URL ]}",
+                    "authors",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "id",
+                      "key": "id",
+                      "value": "",
+                      "type": "string",
+                      "description": ""
+                    }
+                  ],
+                  "query": []
+                },
+                "description": "",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Heisenberg\",\n  \"age\": 45\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get author",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "${[ BASE_URL ]}/authors/:id",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "${[ BASE_URL ]}",
+                    "authors",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "id",
+                      "key": "id",
+                      "value": "",
+                      "type": "string",
+                      "description": ""
+                    }
+                  ],
+                  "query": []
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "name": "Get authors",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "${[ BASE_URL ]}/authors",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "${[ BASE_URL ]}",
+                    "authors"
+                  ],
+                  "variable": [],
+                  "query": []
+                },
+                "description": ""
+              },
+              "response": []
+            },
+            {
+              "name": "Create author",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text",
+                    "enabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "${[ BASE_URL ]}/authors",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "${[ BASE_URL ]}",
+                    "authors"
+                  ],
+                  "variable": [],
+                  "query": []
+                },
+                "description": "",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Heisenberg the Second\",\n  \"age\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            }
+          ],
+          "folderId": "fl_NgMnTrXTRg",
+          "id": "fl_gjVVtejeH5"
+        },
+        {
+          "name": "Healthcheck",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "${[ BASE_URL ]}/healthcheck",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "${[ BASE_URL ]}",
+                "healthcheck"
+              ],
+              "variable": [],
+              "query": []
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ],
+      "folderId": null,
+      "id": "fl_NgMnTrXTRg"
+    }
+  ],
+  "variable": []
+}

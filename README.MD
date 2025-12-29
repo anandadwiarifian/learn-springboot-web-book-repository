@@ -72,13 +72,13 @@ docker start postgres-dev
 
 The application can be configured using environment variables (recommended for production) or `application.properties` (for development).
 
-| Environment Variable | Property Name | Description | Default |
-|---------------------|---------------|-------------|---------|
-| `SPRING_DATASOURCE_URL` | `spring.datasource.url` | PostgreSQL JDBC URL | `jdbc:postgresql://localhost:5432/postgres` |
-| `SPRING_DATASOURCE_USERNAME` | `spring.datasource.username` | Database username | `postgres` |
-| `SPRING_DATASOURCE_PASSWORD` | `spring.datasource.password` | Database password | `yourpassword` |
-| `SECURITY_USER_PASSWORD` | `security.user.password` | Password for user role | `user-password` |
-| `SECURITY_ADMIN_PASSWORD` | `security.admin.password` | Password for admin role | `admin-password` |
+| Environment Variable         | Property Name                | Description             | Default                                     |
+| ---------------------------- | ---------------------------- | ----------------------- | ------------------------------------------- |
+| `SPRING_DATASOURCE_URL`      | `spring.datasource.url`      | PostgreSQL JDBC URL     | `jdbc:postgresql://localhost:5432/postgres` |
+| `SPRING_DATASOURCE_USERNAME` | `spring.datasource.username` | Database username       | `postgres`                                  |
+| `SPRING_DATASOURCE_PASSWORD` | `spring.datasource.password` | Database password       | `yourpassword`                              |
+| `SECURITY_USER_PASSWORD`     | `security.user.password`     | Password for user role  | `user-password`                             |
+| `SECURITY_ADMIN_PASSWORD`    | `security.admin.password`    | Password for admin role | `admin-password`                            |
 
 **Note:** Environment variables automatically override properties defined in `application.properties`.
 
@@ -166,3 +166,22 @@ curl -u user:user-password http://localhost:8080/authors
 # With admin credentials
 curl -u admin:admin-password -X DELETE http://localhost:8080/authors/1
 ```
+
+## API Testing with Postman
+
+Postman collection and environment files are available in the `/postman` directory:
+
+- **Collection**: `postman/book-author-restapi.postman_collection.json`
+- **Environment**: `postman/book-author-restapi.postman_environment.json`
+
+### Environment Variables
+
+The environment file includes:
+
+| Variable              | Default Value    | Description                 |
+| --------------------- | ---------------- | --------------------------- |
+| `BASE_URL`            | `localhost:8080` | API base URL                |
+| `BASIC_AUTH_USERNAME` | `admin`          | Username for authentication |
+| `BASIC_AUTH_PASSWORD` | `admin-password` | Password for authentication |
+
+**Note**: Update the credentials in the environment to match your configuration (user/user-password or admin/admin-password).
